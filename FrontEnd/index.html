@@ -10,16 +10,15 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="assets/scripts/works.js"></script>
-	<script src="assets/scripts/sort.js"></script>
 </head>
 <body>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<a href="#contact"><li>contact</li></a>
-			<li>login</li>
+			<li><a href="/FrontEnd/index.html">projets</a></li>
+			<li><a href="/FrontEnd/index.html#contact">contact</a></li>
+			<li><a href="/FrontEnd/login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -38,8 +37,13 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-		<div class="filters">
-			<!-- Boutons dynamiques -->
+		<div class="filter-buttons">
+			<div class="all-filter">
+				<button class="category-button" onclick="displayAll()">Tous</button>
+			</div>
+			<div class="filters">
+				<!-- Boutons dynamiques -->
+			</div>
 		</div>
 		<div class="gallery">
 			<!-- Contenu de la gallerie dynamique -->
