@@ -9,19 +9,26 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="assets/scripts/works.js"></script>
+	<script src="assets/scripts/works.js" defer></script>
+	<script src="https://kit.fontawesome.com/da403aa189.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	<div class="edition-bar"><i class="fa-regular fa-pen-to-square"></i>Mode édition</div>
 <header>
+	<!-- Barre en mode édition -->
+
+	<div class="container">
+	<div class="nav-menu">
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li><a href="/FrontEnd/index.html">projets</a></li>
 			<li><a href="/FrontEnd/index.html#contact">contact</a></li>
-			<li><a href="/FrontEnd/login.html">login</a></li>
+			<li><a id="log" href="/FrontEnd/login.html"></a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
+</div>
 </header>
 <main>
 	<section id="introduction">
@@ -36,7 +43,11 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="title">
+			<h2>Mes Projets</h2>
+			<!-- Bouton modifier -->
+			<div id="edit"><i class="fa-regular fa-pen-to-square"></i> Modifier</div>
+		</div>
 		<div class="filter-buttons">
 			<div class="all-filter">
 				<button class="category-button" onclick="displayAll()">Tous</button>

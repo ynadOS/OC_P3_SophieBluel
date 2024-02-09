@@ -11,9 +11,13 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="assets/scripts/login.js" defer></script>
 
+
 </head>
 <body>
 <header>
+	<!-- Barre en mode édition -->
+	<div class="edition-bar"><i class="fa-regular fa-pen-to-square"></i>Mode édition</div>
+	<div class="nav-menu">
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
@@ -23,6 +27,7 @@
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
+</div>
 </header>
 <main>
 	<section id="login">
@@ -33,7 +38,7 @@
 			<div id="error-message-mail"></div>
 			<label for="password">Mot de passe</label>
 			<input type="password" name="password" id="password" placeholder="Mot de passe" required>
-			<div id="error-message"></div>
+			<div id="misc-message"></div>
 			<input id="submit" type="submit" value="Se connecter">
 		</form>
         <p><u>Mot de passe oublié</u></p>

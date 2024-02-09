@@ -1,5 +1,5 @@
 
-// ****** REGEX DU COURRIEL ********* //
+// [[[[[[[ REGEX courriel ]]]]]]] //
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     let emailInput = document.getElementById('email')
     let emailError = document.getElementById("error-message-mail")
@@ -15,52 +15,60 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     }
 })
 
+// [[[[[[[ Message de déconnexion lors du logout ]]]]]]] //
+document.addEventListener("DOMContentLoaded", function() {
+    const logoutMessage = localStorage.getItem("logoutMessage")
+    const messageElement = document.getElementById("misc-message")
 
-// ******* Partie login pour accéder à la page d'accueil en mode édition ***** //
+    if (logoutMessage) {
+        messageElement.innerText = logoutMessage
+        localStorage.removeItem("logoutMessage") // Effacer le message après l'avoir affiché
+    }
+});
+
+// [[[[[[[ Fonction pour déconnecter l'admin après 30 minutes ]]]]]]] //
 document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault() // ne pas envoyer le formulaire
+    event.preventDefault() // Empêcher le formulaire de soumettre normalement
 
-    // Get username and password>
-    let username = document.getElementById("email").value
-    let password = document.getElementById("password").value
+    const email = document.getElementById("email").value
+    const password = document.getElementById("password").value
 
-    // You may want to perform validation here before sending the request
+    // Données à envoyer
+    const data = {
+        email: email,
+        password: password
+    };
 
-    // URL API LOGIN
-    let apiUrl = "http://localhost:5678/api/users/login"
-
-    // Example request using fetch
-    fetch(apiUrl, {
-        method: "POST",
+    // Options pour la requête Fetch
+    const options = {
+        method: "POST", // Méthode HTTP (POST)
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": 'application/json' // Indiquer que le contenu est au format JSON
         },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json(); // Convertit la réponse en JSON
-        } else {
-            throw new Error('Identifiants invalides. Veuillez réessayer.');
-        }
-    })
-    .then(data => {
-            // Enregistrement du token dans un cookie sécurisé avec une date d'expiration
-            const expirationDate = new Date();
-            expirationDate.setDate(expirationDate.getDate() + 7); // Exemple : expiration dans 7 jours
-            document.cookie = `token=${data.token}; expires=${expirationDate.toUTCString()}; path=/; Secure; SameSite=Strict`; 
-            
-    
-        //redirection vers la page d'accueil en mode édition
-        window.location.href = "index.html";
-    })
-    .catch(error => {
-        console.error("Error:", error)
-        document.getElementById("error-message").textContent = error.message || "Une erreur s'est produite. Veuillez réessayer.";
-    
-    })
+        body: JSON.stringify(data) // Convertir les données en format JSON
+    };
 
+    // URL de votre endpoint d'authentification
+    const loginUrl = "http://localhost:5678/api/users/login"
+
+    // Effectuer la requête Fetch
+    fetch(loginUrl, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('La requête a échoué avec le statut ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Stocker le token dans le localStorage
+            localStorage.setItem("authToken", data.token)
+            // Afficher un message de succès ou rediriger l'utilisateur, etc.
+            document.getElementById("misc-message").innerText = "Connexion réussie !!!"
+            window.location.href = "index.html"
+        })
+        .catch(error => {
+            console.error('Erreur lors de la requête Fetch:', error);
+            // Afficher un message d'erreur à l'utilisateur, etc.
+            document.getElementById("misc-message").innerText = "Erreur d'authentification, veuillez réessayer"
+        })
 })
