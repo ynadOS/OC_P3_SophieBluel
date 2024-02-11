@@ -9,15 +9,16 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/da403aa189.js" crossorigin="anonymous" defer></script>
 	<script src="assets/scripts/works.js" defer></script>
-	<script src="https://kit.fontawesome.com/da403aa189.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div class="edition-bar"><i class="fa-regular fa-pen-to-square"></i>Mode édition</div>
 <header>
 	<!-- Barre en mode édition -->
 
-	<div class="container">
+<div class="container">
 	<div class="nav-menu">
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -46,15 +47,30 @@
 		<div class="title">
 			<h2>Mes Projets</h2>
 			<!-- Bouton modifier -->
-			<div id="edit"><i class="fa-regular fa-pen-to-square"></i> Modifier</div>
+			<div id="edit"><button class="btn btn-open btn-link">
+				<i class="fa-regular fa-pen-to-square"></i>Modifier</button>
+			</div>
+			<!-- Fenêtre modale -->
+			<section class="modal hidden">
+				<div class="flex">
+					<button class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+					<h3>Galerie photo</h3>
+					<div class="modal-gallery"></div>
+						<div class="photo-works"></div>
+					<div class="line"></div>
+				  <input type="submit" value="Ajouter une photo">
+				</div>
+			</section>
+			<div class="overlay hidden"></div>
+			<!--  -->
 		</div>
 		<div class="filter-buttons">
 			<div class="all-filter">
-				<button class="category-button" onclick="displayAll()">Tous</button>
+				<!-- <button id="all-cat-button" class="category-button">Tous</button> -->
 			</div>
 			<div class="filters">
 				<!-- Boutons dynamiques -->
-			</div>
+			</div>	
 		</div>
 		<div class="gallery">
 			<!-- Contenu de la gallerie dynamique -->

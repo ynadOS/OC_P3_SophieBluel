@@ -1,6 +1,7 @@
 
 // [[[[[[[ REGEX courriel ]]]]]]] //
 document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault()
     let emailInput = document.getElementById('email')
     let emailError = document.getElementById("error-message-mail")
     let email = emailInput.value.trim()
@@ -69,6 +70,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         .catch(error => {
             console.error('Erreur lors de la requête Fetch:', error);
             // Afficher un message d'erreur à l'utilisateur, etc.
-            document.getElementById("misc-message").innerText = "Erreur d'authentification, veuillez réessayer"
+            document.getElementById("misc-message").innerText = "Erreur dans l’identifiant ou le mot de passe"
         })
 })

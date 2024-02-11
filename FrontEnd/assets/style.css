@@ -145,6 +145,7 @@ button {
 	border-radius: 60px ;
 	padding: 10px 20px;
 	margin: 5px;
+	cursor: pointer;
 }	
 
 button:hover {
@@ -181,7 +182,7 @@ button:hover {
 	flex-direction: column;
 }
 
-#contact input, #login input{
+#contact input, #login input, .modal input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -257,6 +258,132 @@ footer nav ul {
 #edit {
 	display: none;
 	position: absolute;
-	left: 65%;
+	right: 30%;
 	gap: 10px;
 }
+
+
+/* FENETRE MODALE */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-height: 80%; /* Hauteur maximale de la modal */
+    overflow-y: auto; /* Défilement vertical automatique lorsque nécessaire */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+  }
+  
+  .modal .flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .modal h3 {
+	text-align: center;
+	font-size: 26px;
+	padding: 30px 30px;
+  }
+  .modal p {
+	font-size: 0.9rem;
+	color: #777;
+	margin: 0.4rem 0 0.2rem;
+  }
+
+  .modal input {
+	margin: 0 auto;
+  }
+  
+
+  .btn {
+	display: flex;
+  }
+  
+  .btn-link, .btn-close {
+	font-family: "Work sans";
+	color: black;
+	background-color: transparent;
+	border: none;
+	gap: 5px;
+  }
+  .btn-link:hover, .btn-close:hover {
+	color: black;
+	background-color: transparent;
+	border: none;
+  }
+  
+  .btn-open {
+	bottom: 150px;
+  }
+  
+  .btn-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.5rem 0.7rem;
+	color: black;
+	background: transparent;
+  }
+
+  .overlay {
+	overflow: auto;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(2px);
+	z-index: 999;
+  }
+
+  .hidden {
+	display: none;
+  }
+
+  .modal-gallery {
+	width: 75%;
+	margin: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	gap: 20px;
+	grid-column-gap: 10px;
+  }
+
+ .line {
+	width: 75%;
+	margin: 50px 30px 40px 30px;
+	border-bottom: solid 1px grey;
+ }
+
+ .works-div {
+	position: relative;
+	display: flex;
+ }
+  .modal-gallery img {
+	width: 100%;
+	height: auto;
+  }
+
+  .trash-can {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 10px;
+	width: 20px;
+	height: 20px;
+	background-color: black;
+	color: white;
+	margin: 0;
+	padding: 0;
+	border-radius: 4px;
+	border: none;
+  }
