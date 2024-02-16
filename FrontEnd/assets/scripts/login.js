@@ -62,7 +62,8 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         })
         .then(data => {
             // Stocker le token dans le localStorage
-            localStorage.setItem("authToken", data.token)
+            sessionStorage.setItem("authToken", data.token)
+            sessionStorage.setItem("idUser", data.userId)
             // Afficher un message de succès ou rediriger l'utilisateur, etc.
             document.getElementById("misc-message").innerText = "Connexion réussie !!!"
             window.location.href = "index.html"
