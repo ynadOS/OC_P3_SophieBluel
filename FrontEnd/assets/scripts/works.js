@@ -51,7 +51,7 @@ function fetchCategory() {
             allCategories = data
             renderCategories(data)
         })
-        .catch(error => console.error('Erreur lors de la récupération des catégories :', error))
+        .catch(error => console.error("Erreur lors de la récupération des catégories : ", error))
 }
 
 // Fonction pour afficher les catégories
@@ -59,11 +59,11 @@ function renderCategories(categories) {
     const divButtons = document.querySelector(".filters")
     divButtons.innerHTML = "" // Efface les boutons précédents pour pas afficher plusieurs fois les photos
     // Création du bouton de filtre "Tous"
-    const allButton = document.createElement("button");
-    allButton.innerText = "Tous";
-    allButton.classList.add("category-button");
-    allButton.setAttribute("data-id", "0"); // Valeur spécifique pour le bouton "Tous"
-    divButtons.appendChild(allButton);
+    const allButton = document.createElement("button")
+    allButton.innerText = "Tous"
+    allButton.classList.add("category-button")
+    allButton.setAttribute("data-id", "0") // Valeur spécifique pour le bouton "Tous"
+    divButtons.appendChild(allButton)
     //Pour chaque catégorie, créer son bouton
     categories.forEach(category => {
         const categoryButton = document.createElement("button")
@@ -77,7 +77,7 @@ function renderCategories(categories) {
     filterButtons.forEach(button => {
         button.addEventListener("click", filterButtonClick)
     })
-}
+ }
 
 // Récupération des travaux de l'API
 function fetchGallery() {
@@ -88,7 +88,7 @@ function fetchGallery() {
             renderGallery(data)
             console.log(allWorks)
         })
-        .catch(error => console.error('Erreur lors de la récupération des œuvres :', error))
+        .catch(error => console.error("Erreur lors de la récupération des œuvres : ", error))
 }
 
 // Fonction pour afficher des travaux
@@ -132,7 +132,7 @@ function renderGallery(works) {
             event.preventDefault() // Empêche le comportement par défaut du bouton
             deleteWork(work.id, work.title)
         })
-    });
+    })
 }
 
 // Fonction pour filtrer les photos
@@ -154,23 +154,23 @@ function filterButtonClick(event) {
 function deleteWork(imageId, imageTitle) {
     const deleteUrl = `http://localhost:5678/api/works/${imageId}`
     fetch(deleteUrl, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-            'Accept': '*/*',
-            'Authorization': "Bearer " + token
+            "Accept": "application/json",
+            "Authorization": "Bearer " + token
         }
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok')
+            throw new Error("La requête a échoué avec le statut : " + response.status)
         }
         fetchGallery()
         document.querySelector(".delete-message").innerText = "Vous avez supprimé la photo nommée « " + imageTitle + " » qui possède l'ID n° " + imageId
         console.log("Vous avez supprimé l'image avec l'id n° " + imageId)
     })
     .catch(error => {
-        console.error('There was a problem with your fetch operation:', error)
-    });
+        console.error("Erreur lors de la requête fetch : ", error)
+    })
 }
 
 // Fonction pour ouvrir la modale
@@ -201,7 +201,7 @@ function openModal(event) {
 // Fonction pour reset la modale à chaque modification
 function resetModalContent() {
     const submitWorkBtn = document.getElementById("upload-btn")
-    const titleInput = document.getElementById('title-input')
+    const titleInput = document.getElementById("title-input")
     const openModalBtn = document.querySelector(".btn-open")
     const fileInput = document.getElementById("file-input")
     const browseBtn = document.getElementById("browse-photo")
@@ -217,20 +217,20 @@ function resetModalContent() {
     document.querySelector(".delete-message").innerHTML = ""
     submitWorkBtn.setAttribute("disabled", "disabled")
     submitWorkBtn.style.backgroundColor = "#A7A7A7"
-    document.getElementById("work-category").selectedIndex = 0;
+    document.getElementById("work-category").selectedIndex = 0 // Afficher la première catégorie par défaut
     document.querySelector(".invalid-size").innerHTML = ""
 }
 
 // Fonction pour fermer la modale
 function closeModal() {
     console.log("Vous avez fermé la modale")
-    const modal = document.querySelector(".modal");
-    const overlay = document.querySelector(".overlay");
-    const divSecondModal = document.querySelector(".modal-add-work");
+    const modal = document.querySelector(".modal")
+    const overlay = document.querySelector(".overlay")
+    const divSecondModal = document.querySelector(".modal-add-work")
 
-    modal.classList.add("hidden");
-    overlay.classList.add("hidden");
-    divSecondModal.classList.remove("hidden");
+    modal.classList.add("hidden")
+    overlay.classList.add("hidden")
+    divSecondModal.classList.remove("hidden")
 
     document.addEventListener("keydown", (event) => {
         if ((event.key === "Escape" || event.key === "Esc") && !document.querySelector(".modal").classList.contains("hidden")) {
@@ -245,7 +245,7 @@ function closeModal() {
 function addNewWork(event) {
     event.preventDefault()
     console.log("Vous allez ajouter un nouveau projet")
-    const overlay = document.querySelector(".overlay");
+    const overlay = document.querySelector(".overlay")
     const closeModalBtn = document.querySelector(".btn-close")
     const previousBtn = document.querySelector(".btn-previous")
     const divFirstModal = document.querySelector(".modal-works")
@@ -255,26 +255,25 @@ function addNewWork(event) {
     const browseBtn = document.getElementById("browse-photo")
     const submitWorkBtn = document.getElementById("upload-btn")
     const photoPreview = document.querySelector(".photo-preview")
-    const titleInput = document.getElementById('title-input');
+    const titleInput = document.getElementById("title-input")
 
     // Bbooléen image + saisie du titre. Si true, le bouton est actif et devient vert, sinon il reste gris
     function checkInputs() {
-        const file = fileInput.files[0];
-        const title = titleInput.value;
+        const file = fileInput.files[0]
+        const title = titleInput.value
         
         if (file && title) {
-            submitWorkBtn.style.backgroundColor = "#1D6154";
-            submitWorkBtn.removeAttribute("disabled");
-
+            submitWorkBtn.style.backgroundColor = "#1D6154"
+            submitWorkBtn.removeAttribute("disabled")
         } else {
-            submitWorkBtn.style.backgroundColor = "#A7A7A7";
-            submitWorkBtn.setAttribute("disabled", true);
+            submitWorkBtn.style.backgroundColor = "#A7A7A7"
+            submitWorkBtn.setAttribute("disabled", true)
         }
     }
 
     // Ajouter un gestionnaire pour chaque champ (file et title) pour vérifier lorsqu'ils sont modifiés
-    fileInput.addEventListener('change', checkInputs)
-    titleInput.addEventListener('input', checkInputs)
+    fileInput.addEventListener("change", checkInputs)
+    titleInput.addEventListener("input", checkInputs)
 
     previousBtn.classList.remove("hidden")
     divFirstModal.classList.add("hidden")     // On cache la première div de la modale
@@ -289,7 +288,7 @@ function addNewWork(event) {
     submitWorkBtn.addEventListener("click", submitWorkButton)
     document.addEventListener("keydown", function (event) {
         if ((event.key === "Escape" || event.key === "Esc") && !document.querySelector(".modal").classList.contains("hidden")) {
-            closeModal(event);
+            closeModal(event)
         }
     })
 }
@@ -316,7 +315,7 @@ function browseWork(event) {
 
     console.log("Vous parcourez une photo")
     fileInput.click()
-    previewImage(fileInput, imagePreview);  
+    previewImage(fileInput, imagePreview) 
 }
 
 // Fonction pour prévisualiser l'image
@@ -333,21 +332,21 @@ function imageUpload (event) {
     const fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024) // Convertir en mégaoctets (Mo)
     if (fileSizeInMegabytes < 4) {
         console.log("Vous avez soumis une photo")
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onload = (event) => {
             event.preventDefault()
             const imagePreview = document.querySelector(".add-works")
             const img = document.createElement("img")
 
-            img.src = event.target.result;
+            img.src = event.target.result
             img.style.maxWidth = "100%"
             img.style.maxHeight = "100%"
             imagePreview.classList.add("hidden")
             photoPreview.classList.remove("hidden")
             photoPreview.appendChild(img)
-        };
+        }
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file)
     } else {
             document.querySelector(".invalid-size").innerText = "La taille du fichier dépasse la limite de 4 Mo."
 }
@@ -357,26 +356,26 @@ function imageUpload (event) {
 function submitWorkButton (event) {
     event.preventDefault()
     console.log("Vous allez soumettre une photo")
-    const fileInput = document.getElementById('file-input');
-    const titleInput = document.getElementById('title-input');
+    const fileInput = document.getElementById("file-input")
+    const titleInput = document.getElementById("title-input")
     const idInput = document.getElementById("work-category")
-    const categoryId = idInput.options[idInput.selectedIndex].getAttribute('data-cat-id')
+    const categoryId = idInput.options[idInput.selectedIndex].getAttribute("data-cat-id")
     
-    const file = fileInput.files[0];
-    const title = titleInput.value;
+    const file = fileInput.files[0]
+    const title = titleInput.value
 
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('title', title);
-    formData.append('category', categoryId)
+    const formData = new FormData()
+    formData.append("image", file)
+    formData.append("title", title)
+    formData.append("category", categoryId)
     console.table(formData)
     
     formData.forEach((value, key) => {
-        console.table(key, value);
-    });
+        console.table(key, value)
+    })
 
     fetch(worksUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
             "Accept": "application/json",
             'Authorization': "Bearer " + token
@@ -385,16 +384,16 @@ function submitWorkButton (event) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error("Une erreur s'est produite lors de l'envoi de la photo");
+            throw new Error("Une erreur s'est produite lors de l'envoi de la photo : " + response.status)
         }
         closeModal()
         fetchGallery()
         console.log("Nouvelle image chargée avec succès !")
     })
     .then(data => {
-        console.log('Réponse du serveur :', data);
+        console.log("Réponse du serveur : ", data)
     })
     .catch(error => {
-        console.error('Erreur suivante :', error);
-    });
+        console.error("Erreur suivante : ", error)
+    })
 }
